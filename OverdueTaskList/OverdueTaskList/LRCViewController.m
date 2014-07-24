@@ -20,10 +20,17 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - IBAction Methods
+
+- (IBAction)addButtonPressed:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
+
+- (IBAction)reorderButtonPressed:(id)sender
+{
+
+}
+
 
 @end

@@ -21,6 +21,9 @@
 		84E0D880197FFBEC00A0D7AC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E0D862197FFBEC00A0D7AC /* UIKit.framework */; };
 		84E0D888197FFBEC00A0D7AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84E0D886197FFBEC00A0D7AC /* InfoPlist.strings */; };
 		84E0D88A197FFBEC00A0D7AC /* OverdueTaskListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0D889197FFBEC00A0D7AC /* OverdueTaskListTests.m */; };
+		84E0D8951980B51900A0D7AC /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0D8941980B51900A0D7AC /* AddTaskViewController.m */; };
+		84E0D8981980B54D00A0D7AC /* DetailTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0D8971980B54D00A0D7AC /* DetailTaskViewController.m */; };
+		84E0D89B1980B58400A0D7AC /* EditTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0D89A1980B58400A0D7AC /* EditTaskViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,12 @@
 		84E0D885197FFBEC00A0D7AC /* OverdueTaskListTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OverdueTaskListTests-Info.plist"; sourceTree = "<group>"; };
 		84E0D887197FFBEC00A0D7AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84E0D889197FFBEC00A0D7AC /* OverdueTaskListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OverdueTaskListTests.m; sourceTree = "<group>"; };
+		84E0D8931980B51900A0D7AC /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
+		84E0D8941980B51900A0D7AC /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
+		84E0D8961980B54D00A0D7AC /* DetailTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTaskViewController.h; sourceTree = "<group>"; };
+		84E0D8971980B54D00A0D7AC /* DetailTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTaskViewController.m; sourceTree = "<group>"; };
+		84E0D8991980B58400A0D7AC /* EditTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTaskViewController.h; sourceTree = "<group>"; };
+		84E0D89A1980B58400A0D7AC /* EditTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTaskViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +124,12 @@
 				84E0D870197FFBEC00A0D7AC /* Main.storyboard */,
 				84E0D873197FFBEC00A0D7AC /* LRCViewController.h */,
 				84E0D874197FFBEC00A0D7AC /* LRCViewController.m */,
+				84E0D8931980B51900A0D7AC /* AddTaskViewController.h */,
+				84E0D8941980B51900A0D7AC /* AddTaskViewController.m */,
+				84E0D8961980B54D00A0D7AC /* DetailTaskViewController.h */,
+				84E0D8971980B54D00A0D7AC /* DetailTaskViewController.m */,
+				84E0D8991980B58400A0D7AC /* EditTaskViewController.h */,
+				84E0D89A1980B58400A0D7AC /* EditTaskViewController.m */,
 				84E0D876197FFBEC00A0D7AC /* Images.xcassets */,
 				84E0D865197FFBEC00A0D7AC /* Supporting Files */,
 			);
@@ -251,8 +266,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				84E0D86F197FFBEC00A0D7AC /* LRCAppDelegate.m in Sources */,
+				84E0D8951980B51900A0D7AC /* AddTaskViewController.m in Sources */,
 				84E0D86B197FFBEC00A0D7AC /* main.m in Sources */,
+				84E0D89B1980B58400A0D7AC /* EditTaskViewController.m in Sources */,
 				84E0D875197FFBEC00A0D7AC /* LRCViewController.m in Sources */,
+				84E0D8981980B54D00A0D7AC /* DetailTaskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
