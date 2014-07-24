@@ -31,12 +31,27 @@
 
 - (IBAction)addTaskButtonPressed:(id)sender
 {
-
+    // get task information and pass to delegate method and call delegate method
+    [self.delegate didAddTask:[self retrieveTaskInformation]]; 
 }
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
+    // call delegate method
+    [self.delegate didCancel];
+}
 
+#pragma mark - Helper Methods
+
+- (LRCTask *) retrieveTaskInformation
+{
+    // make a dictionary with user input
+    NSDictionary *addedTask = @{TITLE : self.textField.text, DESCRIPTION : self.textView.text, DATE : self.datePicker.date, COMPLETION : @NO};
+    
+    // make a new task object with information from added task dictionary
+    LRCTask *newTask = [[LRCTask alloc] initWithData:addedTask];
+    
+    return newTask;
 }
 
 #pragma mark - Navigation

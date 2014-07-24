@@ -37,6 +37,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableView" destination="rym-QM-U13" id="loA-eE-RQv"/>
                         <segue destination="aEm-2v-H6H" kind="modal" identifier="toAddTaskVC" id="ADP-MR-6qV"/>
                         <segue destination="fkv-RD-yCV" kind="push" identifier="toDetailTaskVC" id="yJ2-JA-AM2"/>
                     </connections>
