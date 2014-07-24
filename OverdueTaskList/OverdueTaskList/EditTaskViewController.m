@@ -24,6 +24,7 @@
     // Do any additional setup after loading the view.
     
     // make sure textField responds to delegate methods
+    self.textField.delegate = self; 
     
 }
 

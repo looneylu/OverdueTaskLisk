@@ -24,6 +24,7 @@
 		84E0D8951980B51900A0D7AC /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0D8941980B51900A0D7AC /* AddTaskViewController.m */; };
 		84E0D8981980B54D00A0D7AC /* DetailTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0D8971980B54D00A0D7AC /* DetailTaskViewController.m */; };
 		84E0D89B1980B58400A0D7AC /* EditTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0D89A1980B58400A0D7AC /* EditTaskViewController.m */; };
+		84E0D89F1981A49200A0D7AC /* LRCTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0D89E1981A49200A0D7AC /* LRCTask.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		84E0D8971980B54D00A0D7AC /* DetailTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTaskViewController.m; sourceTree = "<group>"; };
 		84E0D8991980B58400A0D7AC /* EditTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTaskViewController.h; sourceTree = "<group>"; };
 		84E0D89A1980B58400A0D7AC /* EditTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTaskViewController.m; sourceTree = "<group>"; };
+		84E0D89D1981A49200A0D7AC /* LRCTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRCTask.h; sourceTree = "<group>"; };
+		84E0D89E1981A49200A0D7AC /* LRCTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRCTask.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +134,7 @@
 				84E0D8991980B58400A0D7AC /* EditTaskViewController.h */,
 				84E0D89A1980B58400A0D7AC /* EditTaskViewController.m */,
 				84E0D876197FFBEC00A0D7AC /* Images.xcassets */,
+				84E0D89C1981A44F00A0D7AC /* Model */,
 				84E0D865197FFBEC00A0D7AC /* Supporting Files */,
 			);
 			path = OverdueTaskList;
@@ -165,6 +169,15 @@
 				84E0D886197FFBEC00A0D7AC /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84E0D89C1981A44F00A0D7AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84E0D89D1981A49200A0D7AC /* LRCTask.h */,
+				84E0D89E1981A49200A0D7AC /* LRCTask.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +283,7 @@
 				84E0D86B197FFBEC00A0D7AC /* main.m in Sources */,
 				84E0D89B1980B58400A0D7AC /* EditTaskViewController.m in Sources */,
 				84E0D875197FFBEC00A0D7AC /* LRCViewController.m in Sources */,
+				84E0D89F1981A49200A0D7AC /* LRCTask.m in Sources */,
 				84E0D8981980B54D00A0D7AC /* DetailTaskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
