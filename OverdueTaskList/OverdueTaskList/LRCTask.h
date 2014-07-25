@@ -17,4 +17,7 @@
 
 - (id) initWithData:(NSDictionary *)data;
 
+- (NSDictionary *)taskObjectAsAPropertyList;
+- (BOOL) isTaskPastDue;
+
 @end

@@ -76,7 +76,7 @@
     [self.taskObjects addObject:task];
     
     // make a dictionary (PList) with data from task and add it to tasksAsPLists
-    NSMutableDictionary *addedTask = [[self taskObjectAsAPropertyList:task] mutableCopy];
+    NSMutableDictionary *addedTask = [[task taskObjectAsAPropertyList] mutableCopy];
     [self.tasksAsPLists addObject:addedTask];
 
     
@@ -126,7 +126,7 @@
     // but if task is completed, color should be green regardless
     if (task.completion)
         cell.backgroundColor = [UIColor greenColor];
-    else if ([self isTaskPastDue:task.date])
+    else if ([task isTaskPastDue])
         cell.backgroundColor = [UIColor redColor];
     else
         cell.backgroundColor = [UIColor yellowColor];
@@ -182,13 +182,6 @@
 
 #pragma mark - Helper Methods
 
-- (NSDictionary *)taskObjectAsAPropertyList: (LRCTask *)taskObject
-{
-    // make a new dictionary from the taskObject information
-    NSDictionary *task = @{TITLE : taskObject.title, DESCRIPTION : taskObject.description, DATE : taskObject.date, COMPLETION : @(taskObject.completion)};
-    
-    return task;
-}
 
 - (void)retrieveDefaults:(NSMutableArray *)tasks
 {
@@ -204,18 +197,6 @@
         // add task object to taskObjects array
         [self.taskObjects addObject:task];
     }
-}
-
-- (BOOL) isTaskPastDue:(NSDate *) date;
-{
-    // get current date
-    NSDate *currentDate = [NSDate date];
-    
-    // compare date using timeIntervalSince1970 method
-    if ([currentDate timeIntervalSince1970] > [date timeIntervalSince1970])
-        return YES;
-    else
-        return NO;
 }
 
 - (void) updateTaskCompletionForUserDefaults: (LRCTask *)task forIndexPath: (NSIndexPath *)indexPath

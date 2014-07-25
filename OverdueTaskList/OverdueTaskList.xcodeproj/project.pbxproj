@@ -25,6 +25,7 @@
 		84E0D8981980B54D00A0D7AC /* DetailTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0D8971980B54D00A0D7AC /* DetailTaskViewController.m */; };
 		84E0D89B1980B58400A0D7AC /* EditTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0D89A1980B58400A0D7AC /* EditTaskViewController.m */; };
 		84E0D89F1981A49200A0D7AC /* LRCTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0D89E1981A49200A0D7AC /* LRCTask.m */; };
+		84E0D8A219826EA900A0D7AC /* LRCTaskObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0D8A119826EA900A0D7AC /* LRCTaskObjects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		84E0D89A1980B58400A0D7AC /* EditTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTaskViewController.m; sourceTree = "<group>"; };
 		84E0D89D1981A49200A0D7AC /* LRCTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRCTask.h; sourceTree = "<group>"; };
 		84E0D89E1981A49200A0D7AC /* LRCTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRCTask.m; sourceTree = "<group>"; };
+		84E0D8A019826EA900A0D7AC /* LRCTaskObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRCTaskObjects.h; sourceTree = "<group>"; };
+		84E0D8A119826EA900A0D7AC /* LRCTaskObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRCTaskObjects.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +177,8 @@
 		84E0D89C1981A44F00A0D7AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				84E0D8A019826EA900A0D7AC /* LRCTaskObjects.h */,
+				84E0D8A119826EA900A0D7AC /* LRCTaskObjects.m */,
 				84E0D89D1981A49200A0D7AC /* LRCTask.h */,
 				84E0D89E1981A49200A0D7AC /* LRCTask.m */,
 			);
@@ -279,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84E0D86F197FFBEC00A0D7AC /* LRCAppDelegate.m in Sources */,
+				84E0D8A219826EA900A0D7AC /* LRCTaskObjects.m in Sources */,
 				84E0D8951980B51900A0D7AC /* AddTaskViewController.m in Sources */,
 				84E0D86B197FFBEC00A0D7AC /* main.m in Sources */,
 				84E0D89B1980B58400A0D7AC /* EditTaskViewController.m in Sources */,
