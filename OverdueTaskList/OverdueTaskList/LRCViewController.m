@@ -64,7 +64,10 @@
 
 - (IBAction)reorderButtonPressed:(id)sender
 {
-
+    if (self.tableView.editing)
+        self.tableView.editing = NO;
+    else
+        self.tableView.editing = YES;
 }
 
 #pragma mark - Delegate Methods
@@ -156,11 +159,6 @@
     [tableView reloadData];
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // allow cell to be edit
-    return YES;
-}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -176,6 +174,38 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // allow cell to be edit
+    return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // allow row to be moved
+    return YES;
+}
+
+- (void) tableView:(UITableView *) tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    // after row is moved, update taskObjects, tasksAsPLists, and NSUserDefaults t obe in proper order
+    NSMutableDictionary *movedTask = [self.tasksAsPLists objectAtIndex:sourceIndexPath.row];
+    LRCTask *reorderedTask = [self.taskObjects objectAtIndex:sourceIndexPath.row];
+    
+    // update taskObjects
+    [self.taskObjects removeObjectAtIndex:sourceIndexPath.row];
+    [self.taskObjects insertObject:reorderedTask atIndex:destinationIndexPath.row];
+    
+    // update tasksAsPLists
+    [self.tasksAsPLists removeObjectAtIndex:sourceIndexPath.row];
+    [self.tasksAsPLists insertObject:movedTask atIndex:destinationIndexPath.row];
+    
+    // update NSUserDefaults
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_TASKS];
+    [[NSUserDefaults standardUserDefaults] setObject:self.tasksAsPLists forKey:USER_TASKS];
+    [[NSUserDefaults standardUserDefaults] synchronize]; 
 }
 
 #pragma mark - Helper Methods
