@@ -29,10 +29,11 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    // retrieve user defaults
     [self.tasksAsPLists addObjectsFromArray:[[NSUserDefaults standardUserDefaults] objectForKey:USER_TASKS]];
     
+    // retrieve user defaults
     [self retrieveDefaults:self.tasksAsPLists];
-    NSLog(@"%@", self.taskObjects);
     
 }
 
@@ -103,23 +104,6 @@
     return [self.taskObjects count];
 }
 
-
-#pragma mark - Helper Methods
-
-- (NSDictionary *)taskObjectAsAPropertyList: (LRCTask *)taskObject
-{
-    // make a new dictionary from the taskObject information
-    NSDictionary *task = @{TITLE : taskObject.title, DESCRIPTION : taskObject.description, DATE : taskObject.date, COMPLETION : @(taskObject.completion)};
-    
-    return task;
-}
-
-- (LRCTask *)taskObjectForDictionary:(NSDictionary *)dictionary
-{
-    LRCTask *taskObject = [[LRCTask alloc] initWithData:dictionary];
-    return taskObject;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
@@ -136,8 +120,53 @@
     [dateFormat setDateStyle:NSDateFormatterMediumStyle];
     cell.detailTextLabel.text = [dateFormat stringFromDate:task.date];
     
-    return cell;
+    // check to see if task is past due
+    // if task is past due, the cell's background should be red
+    // otherwise, the the cell's background is yellow
+    // but if task is completed, color should be green regardless
+    if (task.completion)
+        cell.backgroundColor = [UIColor greenColor];
+    else if ([self isTaskPastDue:task.date])
+        cell.backgroundColor = [UIColor redColor];
+    else
+        cell.backgroundColor = [UIColor yellowColor];
     
+    return cell;
+}
+
+- (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    // if accessory button is tapped, segue to DetailTaskViewController
+    [self performSegueWithIdentifier:@"toDetailTaskVC" sender:nil];
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // get task from row at indexPath
+    LRCTask *task = [self.taskObjects objectAtIndex:indexPath.row];
+    
+    // change completion status
+    if (task.completion)
+        task.completion = NO;
+    else
+        task.completion = YES;
+    
+    // update user defaults
+    [self updateTaskCompletionForUserDefaults:task forIndexPath:indexPath];
+    
+    // update tableView
+    [tableView reloadData];
+}
+
+
+#pragma mark - Helper Methods
+
+- (NSDictionary *)taskObjectAsAPropertyList: (LRCTask *)taskObject
+{
+    // make a new dictionary from the taskObject information
+    NSDictionary *task = @{TITLE : taskObject.title, DESCRIPTION : taskObject.description, DATE : taskObject.date, COMPLETION : @(taskObject.completion)};
+    
+    return task;
 }
 
 - (void)retrieveDefaults:(NSMutableArray *)tasks
@@ -154,6 +183,31 @@
         // add task object to taskObjects array
         [self.taskObjects addObject:task];
     }
+}
+
+- (BOOL) isTaskPastDue:(NSDate *) date;
+{
+    // get current date
+    NSDate *currentDate = [NSDate date];
+    
+    // compare date using timeIntervalSince1970 method
+    if ([currentDate timeIntervalSince1970] > [date timeIntervalSince1970])
+        return YES;
+    else
+        return NO;
+}
+
+- (void) updateTaskCompletionForUserDefaults: (LRCTask *)task forIndexPath: (NSIndexPath *)indexPath
+{
+    // update tasksAsPLists
+    NSMutableDictionary *taskAsPList = [self.tasksAsPLists objectAtIndex:indexPath.row];
+    [taskAsPList setObject:@(task.completion) forKey:COMPLETION];
+    
+    // update user defaults
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_TASKS];
+    [[NSUserDefaults standardUserDefaults] setObject:self.tasksAsPLists forKey:USER_TASKS];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 #pragma mark - Navigation
