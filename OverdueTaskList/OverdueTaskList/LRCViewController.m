@@ -23,9 +23,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    NSArray *array = [[NSUserDefaults standardUserDefaults] arrayForKey:USER_TASKS];
+    for (NSDictionary *dictionary in array)
+    {
+        LRCTask *taskObject = [self taskObjectForDictionary:dictionary];
+        [self.taskObjects addObject:taskObject];
+    }
 }
 
-#pragma mark - Lazy Instantiation 
+#pragma mark - Lazy Instantiation
 
 - (NSMutableArray *) taskObjects
 {
@@ -39,8 +46,8 @@
 
 - (IBAction)addButtonPressed:(id)sender
 {
-    // perform segue
-    [self performSegueWithIdentifier:@"toAddTaskVS" sender:sender];
+    // perform segue to AddTaskViewController
+    [self performSegueWithIdentifier:@"toAddTaskVC" sender:sender];
 }
 
 - (IBAction)reorderButtonPressed:(id)sender
@@ -91,6 +98,12 @@
     NSDictionary *task = @{TITLE : taskObject.title, DESCRIPTION : taskObject.description, DATE : taskObject.date, COMPLETION :@(taskObject.completion)};
     
     return task;
+}
+
+- (LRCTask *)taskObjectForDictionary:(NSDictionary *)dictionary
+{
+    LRCTask *taskObject = [[LRCTask alloc] initWithData:dictionary];
+    return taskObject;
 }
 
 # pragma mark - Navigation
