@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSMutableArray *taskObjects;
 @property (nonatomic, strong) NSMutableArray *tasksAsPLists;
 
+
 @end
 
 @implementation LRCViewController
@@ -31,8 +32,6 @@
     
     // retrieve user defaults
     [self.tasksAsPLists addObjectsFromArray:[[NSUserDefaults standardUserDefaults] objectForKey:USER_TASKS]];
-    
-    // retrieve user defaults
     [self retrieveDefaults:self.tasksAsPLists];
     
 }
@@ -43,7 +42,7 @@
 {
     if (!_taskObjects)
         _taskObjects = [[NSMutableArray alloc] init];
-    
+
     return _taskObjects;
 }
 
@@ -51,7 +50,7 @@
 {
     if (!_tasksAsPLists)
         _tasksAsPLists = [[NSMutableArray alloc] init];
-    
+
     return _tasksAsPLists;
 }
 
@@ -76,8 +75,7 @@
     [self.taskObjects addObject:task];
     
     // make a dictionary (PList) with data from task and add it to tasksAsPLists
-    NSMutableDictionary *addedTask = [[task taskObjectAsAPropertyList] mutableCopy];
-    [self.tasksAsPLists addObject:addedTask];
+    [self.tasksAsPLists addObject:[[task taskObjectAsAPropertyList] mutableCopy]];
 
     
     // persist self.taskAsPLists to NSUserDefaults
@@ -101,7 +99,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // count the number of task objects in taskObjects array and return value
-    return [self.taskObjects count];
+   return [self.taskObjects count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
