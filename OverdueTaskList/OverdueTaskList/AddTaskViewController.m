@@ -27,12 +27,6 @@
     self.textField.delegate = self;
     self.textView.delegate = self;
     
-    NSLog(@"%@", [NSDate date]);
-    LRCTask *task = [[LRCTask alloc] init];
-    task.date = [NSDate date];
-    
-    NSLog(@"%@", task.date); 
-    
 }
 
 #pragma mark - IBAction Methods
@@ -83,13 +77,5 @@
     return newTask;
 }
 
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
 
 @end

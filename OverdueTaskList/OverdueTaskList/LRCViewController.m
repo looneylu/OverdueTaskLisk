@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray *taskObjects;
+@property (nonatomic, strong) NSMutableArray *tasksAsPLists;
 
 @end
 
@@ -27,7 +28,12 @@
     // set tableview data source and delegate to self
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-
+    
+    [self.tasksAsPLists addObjectsFromArray:[[NSUserDefaults standardUserDefaults] objectForKey:USER_TASKS]];
+    
+    [self retrieveDefaults:self.tasksAsPLists];
+    NSLog(@"%@", self.taskObjects);
+    
 }
 
 #pragma mark - Lazy Instantiation
@@ -38,6 +44,14 @@
         _taskObjects = [[NSMutableArray alloc] init];
     
     return _taskObjects;
+}
+
+- (NSMutableArray *) tasksAsPLists
+{
+    if (!_tasksAsPLists)
+        _tasksAsPLists = [[NSMutableArray alloc] init];
+    
+    return _tasksAsPLists;
 }
 
 #pragma mark - IBAction Methods
@@ -60,18 +74,13 @@
     // add task to taskObjects array
     [self.taskObjects addObject:task];
     
-    // create a mutable array to save to NSUser defaults
-    // first check to see if there is NUserDefaults already has an array of of Task Objects
-    NSMutableArray *addedTasks = [[[NSUserDefaults standardUserDefaults] arrayForKey:USER_TASKS] mutableCopy];
-    // if addTasks is an empty array
-    if (!addedTasks)
-        addedTasks = [[NSMutableArray alloc] init];
+    // make a dictionary (PList) with data from task and add it to tasksAsPLists
+    NSMutableDictionary *addedTask = [[self taskObjectAsAPropertyList:task] mutableCopy];
+    [self.tasksAsPLists addObject:addedTask];
+
     
-    // add task object to addedTasks method
-    [addedTasks addObject:[self taskObjectAsAPropertyList:task]];
-    
-    // persist addedTasks to NSUserDefaults
-    [[NSUserDefaults standardUserDefaults] setObject:addedTasks forKey: USER_TASKS];
+    // persist self.taskAsPLists to NSUserDefaults
+    [[NSUserDefaults standardUserDefaults] setObject:self.tasksAsPLists forKey: USER_TASKS];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     //dismiss AddTaskViewController
@@ -100,7 +109,7 @@
 - (NSDictionary *)taskObjectAsAPropertyList: (LRCTask *)taskObject
 {
     // make a new dictionary from the taskObject information
-    NSDictionary *task = @{TITLE : taskObject.title, DESCRIPTION : taskObject.description, DATE : taskObject.date, COMPLETION :@(taskObject.completion)};
+    NSDictionary *task = @{TITLE : taskObject.title, DESCRIPTION : taskObject.description, DATE : taskObject.date, COMPLETION : @(taskObject.completion)};
     
     return task;
 }
@@ -129,6 +138,22 @@
     
     return cell;
     
+}
+
+- (void)retrieveDefaults:(NSMutableArray *)tasks
+{
+    // iterate through tasks array and retrieve dictionary key values for task objects
+    for (NSDictionary *dictionary in tasks)
+    {
+        LRCTask *task = [[LRCTask alloc] init];
+        task.title = [dictionary objectForKey:TITLE];
+        task.description = [dictionary objectForKey:DESCRIPTION];
+        task.date = [dictionary objectForKey:DATE];
+        task.completion = [[dictionary objectForKey:COMPLETION] boolValue];
+
+        // add task object to taskObjects array
+        [self.taskObjects addObject:task];
+    }
 }
 
 #pragma mark - Navigation
