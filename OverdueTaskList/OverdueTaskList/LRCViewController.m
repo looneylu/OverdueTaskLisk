@@ -9,7 +9,7 @@
 #import "LRCViewController.h"
 #import "AddTaskViewController.h"
 
-@interface LRCViewController () <AddTaskViewControllerDelegate>
+@interface LRCViewController () <AddTaskViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -23,13 +23,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    NSArray *array = [[NSUserDefaults standardUserDefaults] arrayForKey:USER_TASKS];
-    for (NSDictionary *dictionary in array)
-    {
-        LRCTask *taskObject = [self taskObjectForDictionary:dictionary];
-        [self.taskObjects addObject:taskObject];
-    }
+ 
+    // set tableview data source and delegate to self
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+
 }
 
 #pragma mark - Lazy Instantiation
@@ -90,6 +88,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // count the number of task objects in taskObjects array and return value
+    return [self.taskObjects count];
+}
+
+
 #pragma mark - Helper Methods
 
 - (NSDictionary *)taskObjectAsAPropertyList: (LRCTask *)taskObject
@@ -106,7 +111,27 @@
     return taskObject;
 }
 
-# pragma mark - Navigation
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    // configure cell
+    // cell text label displays the task title
+    // cell detail label displays the date it needs to be completed
+    LRCTask *task = [self.taskObjects objectAtIndex:indexPath.row];
+    cell.textLabel.text = task.title;
+    
+    // format date to display MM-dd-yyyy
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateStyle:NSDateFormatterMediumStyle];
+    cell.detailTextLabel.text = [dateFormat stringFromDate:task.date];
+    
+    return cell;
+    
+}
+
+#pragma mark - Navigation
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

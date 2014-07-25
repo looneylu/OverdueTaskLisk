@@ -8,7 +8,7 @@
 
 #import "AddTaskViewController.h"
 
-@interface AddTaskViewController () <UITextFieldDelegate>
+@interface AddTaskViewController () <UITextFieldDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
@@ -23,8 +23,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //make sure textField responds to UITextField Delegate methods
+    //make sure textField and textView respond to Delegate methods
     self.textField.delegate = self;
+    self.textView.delegate = self;
+    
+    NSLog(@"%@", [NSDate date]);
+    LRCTask *task = [[LRCTask alloc] init];
+    task.date = [NSDate date];
+    
+    NSLog(@"%@", task.date); 
+    
 }
 
 #pragma mark - IBAction Methods
@@ -41,15 +49,36 @@
     [self.delegate didCancel];
 }
 
+#pragma mark - Delegate Methods
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    // hide keyboard
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
+- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
+        return NO;
+    } else
+        return YES; 
+}
+
 #pragma mark - Helper Methods
 
 - (LRCTask *) retrieveTaskInformation
 {
-    // make a dictionary with user input
-    NSDictionary *addedTask = @{TITLE : self.textField.text, DESCRIPTION : self.textView.text, DATE : self.datePicker.date, COMPLETION : @NO};
-    
-    // make a new task object with information from added task dictionary
-    LRCTask *newTask = [[LRCTask alloc] initWithData:addedTask];
+    // make a new task object with information from user input
+    LRCTask *newTask = [[LRCTask alloc] init];
+    newTask.title = self.textField.text;
+    newTask.date = self.datePicker.date;
+    newTask.description = self.textView.text;
+    newTask.completion = NO; 
     
     return newTask;
 }
