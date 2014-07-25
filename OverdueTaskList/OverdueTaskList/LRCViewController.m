@@ -158,6 +158,27 @@
     [tableView reloadData];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // allow cell to be edit
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // update taskObjects with deletion
+    [self.taskObjects removeObjectAtIndex:indexPath.row];
+    
+    // update tasksAsPLists with deletion
+    [self.tasksAsPLists removeObjectAtIndex:indexPath.row];
+    
+    // update user defaults
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_TASKS];
+    [[NSUserDefaults standardUserDefaults] setObject:self.tasksAsPLists forKey:USER_TASKS];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
 
 #pragma mark - Helper Methods
 
