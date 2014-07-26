@@ -214,12 +214,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Jz-HU-FIH">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4HC-d8-i04">
                                 <rect key="frame" x="251" y="473" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="completionSwitch:" destination="WPb-07-D0G" eventType="valueChanged" id="p3i-fl-T7V"/>
-                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -233,7 +230,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </navigationItem>
                     <connections>
                         <outlet property="completionLabel" destination="Akp-ye-Hao" id="Wum-sa-oMe"/>
-                        <outlet property="completionSwitch" destination="5Jz-HU-FIH" id="bXG-Ki-WAt"/>
+                        <outlet property="completionSwitch" destination="4HC-d8-i04" id="2jf-mv-R68"/>
                         <outlet property="datePicker" destination="xtW-qj-o6Z" id="ddJ-zJ-DkO"/>
                         <outlet property="saveButton" destination="FzX-1Q-qUE" id="GfG-bf-3aB"/>
                         <outlet property="textField" destination="tIG-hi-lJd" id="9q1-vm-I5q"/>

@@ -50,17 +50,12 @@
     editedTask.title = self.textField.text;
     editedTask.description = self.textView.text;
     editedTask.date = self.datePicker.date;
+    editedTask.completion = self.completionSwitch.on;
     
     // call delegate method 
     [self.delegate didEditTask:editedTask];
 }
-- (IBAction)completionSwitch:(id)sender
-{
-    if (self.completionSwitch.on)
-        self.task.completion = YES;
-    else
-        self.task.completion = NO;
-}
+
 
 #pragma mark - Delegate Methods
 

@@ -12,11 +12,10 @@
 
 @interface LRCViewController () <AddTaskViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, DetailTaskViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-
 @property (nonatomic, strong) NSMutableArray *taskObjects;
 @property (nonatomic, strong) NSMutableArray *tasksAsPLists;
 
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *reorderButton;
 
 @end
@@ -36,6 +35,8 @@
     [self.tasksAsPLists addObjectsFromArray:[[NSUserDefaults standardUserDefaults] objectForKey:USER_TASKS]];
     [self retrieveDefaults:self.tasksAsPLists];
     
+    // check to see if user needs to be reminded of past due tasks
+    [self alertUser];
 }
 
 #pragma mark - Lazy Instantiation
@@ -227,6 +228,31 @@
 
 #pragma mark - Helper Methods
 
+- (void) alertUser
+{
+    // alerts user if there are any tasks past due
+    // alert user if there are any tasks past due
+    BOOL shouldAlertUser = NO;
+    int count = 0;
+    
+    for (LRCTask *checkTask in self.taskObjects)
+    {
+        if ([checkTask isTaskPastDue])
+        {
+            // if there are any past due task, set alertUser to YES
+            // and keep track of how many past due task
+            shouldAlertUser = YES;
+            count++;
+        }
+    }
+
+    if (shouldAlertUser)
+    {
+        NSString *alertString = [[NSString alloc] initWithFormat:@"You have %d past due task(s)", count];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:alertString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
+}
 
 - (void)retrieveDefaults:(NSMutableArray *)tasks
 {

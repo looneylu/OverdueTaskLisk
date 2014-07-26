@@ -82,7 +82,11 @@
         self.dateLabel.text = [formattedDate stringFromDate:self.task.date];
     }
     
-    [self setStatusButtonColor];
+    if (self.task.completion != editedTask.completion)
+    {
+        self.task.completion = editedTask.completion; 
+        [self setStatusButtonColor];
+    }
     
     [self.navigationController popViewControllerAnimated:YES];
     
