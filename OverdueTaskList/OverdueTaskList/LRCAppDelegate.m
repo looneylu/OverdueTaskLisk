@@ -47,7 +47,9 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    NSLog(@"App terminated"); 
+    NSMutableArray *tasksAsPLists = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:USER_TASKS]];
+    
+    [self setBadgeNumber:tasksAsPLists];
 }
 
 #pragma mark - Helper Methods
@@ -69,6 +71,7 @@
 {
     int count = 0;
     
+    // iterate through tasks in dictionaries, and if any are past due, increase count number
     for (NSDictionary *PList in dictionaries)
     {
         LRCTask *task = [self retrieveDefaults:PList];
@@ -77,6 +80,7 @@
             count++;
     }
     
+    // set badge number;
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
 }
 
