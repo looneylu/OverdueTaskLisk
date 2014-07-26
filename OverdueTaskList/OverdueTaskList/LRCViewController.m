@@ -10,13 +10,14 @@
 #import "AddTaskViewController.h"
 #import "DetailTaskViewController.h"
 
-@interface LRCViewController () <AddTaskViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface LRCViewController () <AddTaskViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, DetailTaskViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray *taskObjects;
 @property (nonatomic, strong) NSMutableArray *tasksAsPLists;
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *reorderButton;
 
 @end
 
@@ -66,12 +67,27 @@
 - (IBAction)reorderButtonPressed:(id)sender
 {
     if (self.tableView.editing)
+    {
         self.tableView.editing = NO;
+        [self.reorderButton setTitle:@"Reorder"]; 
+    }
     else
+    {
         self.tableView.editing = YES;
+        [self.reorderButton setTitle:@"Done"];
+    }
 }
 
 #pragma mark - Delegate Methods
+
+- (void)taskPropertyChanged:(LRCTask *)task :(NSIndexPath *) indexPath
+{
+    // update table view to show status changes
+    [self.tableView reloadData];
+    
+    // persist to user defaults
+    [self updateTaskCompletionForUserDefaults:task forIndexPath:indexPath];
+}
 
 - (void)didAddTask:(LRCTask *)task
 {
@@ -232,7 +248,10 @@
 {
     // update tasksAsPLists
     NSMutableDictionary *taskAsPList = [self.tasksAsPLists objectAtIndex:indexPath.row];
+    [taskAsPList setObject:task.title forKey:TITLE];
+    [taskAsPList setObject:task.description forKey:DESCRIPTION];
     [taskAsPList setObject:@(task.completion) forKey:COMPLETION];
+    [taskAsPList setObject:task.date forKey:DATE];
     
     // update user defaults
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_TASKS];
@@ -264,9 +283,10 @@
         DetailTaskViewController *detailTaskVC = segue.destinationViewController;
         
         LRCTask *task = [self.taskObjects objectAtIndex:indexPath.row];
-        detailTaskVC.taskTitle = task.title;
-        detailTaskVC.description = task.description;
-        detailTaskVC.date = task.date;
+        
+        detailTaskVC.task = task;
+        detailTaskVC.delegate = self;
+        detailTaskVC.taskIndex = indexPath;
     }
 }
 

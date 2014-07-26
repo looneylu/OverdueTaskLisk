@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LRCTask.h"
+
+@protocol EditTaskViewControllerDelegate <NSObject>
+
+- (void) didEditTask :(LRCTask *) editedTask;
+
+@end
 
 @interface EditTaskViewController : UIViewController
+
+@property (nonatomic, strong) LRCTask *task; 
+@property (nonatomic, weak) id <EditTaskViewControllerDelegate> delegate; 
 
 @end

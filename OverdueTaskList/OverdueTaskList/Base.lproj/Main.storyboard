@@ -63,6 +63,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="reorderButton" destination="kYg-Ae-LVM" id="87C-Vj-k4B"/>
                         <outlet property="tableView" destination="rym-QM-U13" id="loA-eE-RQv"/>
                         <segue destination="aEm-2v-H6H" kind="modal" identifier="toAddTaskVC" id="ADP-MR-6qV"/>
                         <segue destination="fkv-RD-yCV" kind="push" identifier="toDetailTaskVC" id="yJ2-JA-AM2"/>
@@ -122,6 +123,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFR-RO-jvw">
+                                <rect key="frame" x="100" y="370" width="121" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="statusButtonPressed:" destination="fkv-RD-yCV" eventType="touchUpInside" id="Z8b-7e-1A8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -135,6 +146,7 @@
                     <connections>
                         <outlet property="dateLabel" destination="qnz-yj-E9Y" id="zTL-Pl-0Xk"/>
                         <outlet property="descriptionTextField" destination="3GG-5W-RjL" id="4F1-Dw-zZ3"/>
+                        <outlet property="statusButton" destination="rFR-RO-jvw" id="xAr-kg-GeZ"/>
                         <outlet property="taskTitleLabel" destination="CPf-rA-6Bc" id="aH1-TF-LNs"/>
                         <segue destination="WPb-07-D0G" kind="push" identifier="toEditTaskVC" id="dwc-Mr-0eL"/>
                     </connections>
@@ -208,6 +220,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </navigationItem>
                     <connections>
                         <outlet property="datePicker" destination="xtW-qj-o6Z" id="ddJ-zJ-DkO"/>
+                        <outlet property="saveButton" destination="FzX-1Q-qUE" id="GfG-bf-3aB"/>
                         <outlet property="textField" destination="tIG-hi-lJd" id="9q1-vm-I5q"/>
                         <outlet property="textView" destination="6Vt-Kv-EU1" id="8m8-VG-TAT"/>
                     </connections>

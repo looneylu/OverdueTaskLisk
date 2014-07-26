@@ -8,11 +8,12 @@
 
 #import "EditTaskViewController.h"
 
-@interface EditTaskViewController () <UITextFieldDelegate>
+@interface EditTaskViewController () <UITextFieldDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
 @end
 
@@ -24,7 +25,13 @@
     // Do any additional setup after loading the view.
     
     // make sure textField responds to delegate methods
-    self.textField.delegate = self; 
+    self.textField.delegate = self;
+    self.textView.delegate = self;
+    
+    // display current task information
+    self.textField.text = self.task.title;
+    self.textView.text = self.task.description;
+    self.datePicker.date = self.task.date;
     
 }
 
@@ -32,17 +39,41 @@
 
 - (IBAction)saveButtonPressed:(id)sender
 {
-
+    LRCTask *editedTask = [[LRCTask alloc] init];
+    
+    // update task information
+    editedTask.title = self.textField.text;
+    editedTask.description = self.textView.text;
+    editedTask.date = self.datePicker.date;
+    
+    // call delegate method 
+    [self.delegate didEditTask:editedTask];
 }
 
+#pragma mark - Delegate Methods
 
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    // hide keyboard
+    [textField resignFirstResponder];
+    
+    // if textField or textView are empty, disable save button
+    if (textField.text.length > 0)
+        self.saveButton.enabled = YES;
+    else
+        self.saveButton.enabled = NO;
+    
+    return YES;
+}
+
+- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
 }
 
 

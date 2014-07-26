@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LRCTask.h"
+
+@protocol DetailTaskViewDelegate
+
+@required
+
+- (void) taskPropertyChanged:(LRCTask *) task :(NSIndexPath *) indexPath;
+
+@end
 
 @interface DetailTaskViewController : UIViewController
 
-@property (nonatomic, strong) NSString *taskTitle;
-@property (nonatomic, strong) NSString *description;
-@property (nonatomic, strong) NSDate *date;
+@property (nonatomic,strong) NSIndexPath *taskIndex;
+@property (nonatomic, strong) LRCTask *task;
+@property (weak, nonatomic) id <DetailTaskViewDelegate> delegate; 
 
 @end
