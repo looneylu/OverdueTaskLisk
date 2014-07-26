@@ -7,6 +7,7 @@
 //
 
 #import "LRCAppDelegate.h"
+#import "LRCTask.h"
 
 @implementation LRCAppDelegate
 
@@ -26,6 +27,11 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    NSMutableArray *tasksAsPLists = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:USER_TASKS]];
+    
+    [self setBadgeNumber:tasksAsPLists];
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -41,6 +47,37 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    NSLog(@"App terminated"); 
+}
+
+#pragma mark - Helper Methods
+
+- (LRCTask *)retrieveDefaults:(NSDictionary *)dictionary
+{
+    // retrieve task object from dictionary key values
+
+    LRCTask *task = [[LRCTask alloc] init];
+    task.title = [dictionary objectForKey:TITLE];
+    task.description = [dictionary objectForKey:DESCRIPTION];
+    task.date = [dictionary objectForKey:DATE];
+    task.completion = [[dictionary objectForKey:COMPLETION] boolValue];
+    
+    return task;
+}
+
+- (void) setBadgeNumber:(NSMutableArray *) dictionaries
+{
+    int count = 0;
+    
+    for (NSDictionary *PList in dictionaries)
+    {
+        LRCTask *task = [self retrieveDefaults:PList];
+        
+        if ([task isTaskPastDue] && !task.completion)
+            count++;
+    }
+    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
 }
 
 @end

@@ -39,6 +39,9 @@
     [self alertUser];
 }
 
+
+
+
 #pragma mark - Lazy Instantiation
 
 - (NSMutableArray *) taskObjects
@@ -235,9 +238,11 @@
     BOOL shouldAlertUser = NO;
     int count = 0;
     
+    // iterate through taskObjects and check to see if
+    // any are past due
     for (LRCTask *checkTask in self.taskObjects)
     {
-        if ([checkTask isTaskPastDue])
+        if ([checkTask isTaskPastDue] && !checkTask.completion)
         {
             // if there are any past due task, set alertUser to YES
             // and keep track of how many past due task
@@ -246,12 +251,17 @@
         }
     }
 
+    // alert message
     if (shouldAlertUser)
     {
         NSString *alertString = [[NSString alloc] initWithFormat:@"You have %d past due task(s)", count];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:alertString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     }
+    
+    // display a badge on app icon if there are any past due tasks
+    if (count > 0)
+        [[UIApplication sharedApplication]setApplicationIconBadgeNumber:0];
 }
 
 - (void)retrieveDefaults:(NSMutableArray *)tasks
