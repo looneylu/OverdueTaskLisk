@@ -10,6 +10,10 @@
 
 @interface DetailTaskViewController ()
 
+@property (strong, nonatomic) IBOutlet UILabel *taskTitleLabel;
+@property (strong, nonatomic) IBOutlet UITextView *descriptionTextField;
+@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
+
 @end
 
 @implementation DetailTaskViewController
@@ -18,13 +22,22 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.taskTitleLabel.text = self.taskTitle;
+    self.descriptionTextField.text = self.description;
+    
+    // format date to display MM-dd-yyyy
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateStyle:NSDateFormatterMediumStyle];
+    self.dateLabel.text = [dateFormat stringFromDate:self.date];
+
 }
 
 #pragma mark - IBAction Methods
 
 - (IBAction)editButtonPressed:(id)sender
 {
-
+    [self performSegueWithIdentifier:@"toEditTaskVC" sender:nil];
 }
 
 #pragma mark - Navigation

@@ -8,6 +8,7 @@
 
 #import "LRCViewController.h"
 #import "AddTaskViewController.h"
+#import "DetailTaskViewController.h"
 
 @interface LRCViewController () <AddTaskViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -138,7 +139,7 @@
 - (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
     // if accessory button is tapped, segue to DetailTaskViewController
-    [self performSegueWithIdentifier:@"toDetailTaskVC" sender:nil];
+    [self performSegueWithIdentifier:@"toDetailTaskVC" sender:indexPath];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -253,6 +254,19 @@
         // create a variable of the class and set its delegate property to self
         AddTaskViewController *addTaskVC = segue.destinationViewController;
         addTaskVC.delegate = self;
+    }
+    
+    // DetailTaskViewController
+    if ([segue.destinationViewController isKindOfClass:[DetailTaskViewController class]])
+    {
+        NSIndexPath *indexPath = sender;
+
+        DetailTaskViewController *detailTaskVC = segue.destinationViewController;
+        
+        LRCTask *task = [self.taskObjects objectAtIndex:indexPath.row];
+        detailTaskVC.taskTitle = task.title;
+        detailTaskVC.description = task.description;
+        detailTaskVC.date = task.date;
     }
 }
 

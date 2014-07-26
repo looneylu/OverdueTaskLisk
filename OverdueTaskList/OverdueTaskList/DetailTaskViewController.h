@@ -10,4 +10,8 @@
 
 @interface DetailTaskViewController : UIViewController
 
+@property (nonatomic, strong) NSString *taskTitle;
+@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSDate *date;
+
 @end
