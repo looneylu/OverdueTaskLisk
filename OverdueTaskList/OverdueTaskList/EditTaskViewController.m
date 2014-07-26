@@ -14,6 +14,9 @@
 @property (strong, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+@property (strong, nonatomic) IBOutlet UILabel *completionLabel;
+
+@property (strong, nonatomic) IBOutlet UISwitch *completionSwitch;
 
 @end
 
@@ -33,6 +36,8 @@
     self.textView.text = self.task.description;
     self.datePicker.date = self.task.date;
     
+    self.completionSwitch.on = self.task.completion; 
+    
 }
 
 #pragma mark - IBAction Methods
@@ -48,6 +53,13 @@
     
     // call delegate method 
     [self.delegate didEditTask:editedTask];
+}
+- (IBAction)completionSwitch:(id)sender
+{
+    if (self.completionSwitch.on)
+        self.task.completion = YES;
+    else
+        self.task.completion = NO;
 }
 
 #pragma mark - Delegate Methods

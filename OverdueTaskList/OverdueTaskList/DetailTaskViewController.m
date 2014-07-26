@@ -58,7 +58,6 @@
     
     // if the task's title changed update information for task object
     // and taskTitle label
-    NSLog(@"%@   %@", self.task.title, editedTask.title);
     if (![self.task.title isEqualToString:editedTask.title])
     {
         self.task.title = editedTask.title;
@@ -82,6 +81,9 @@
         [formattedDate setDateStyle:NSDateFormatterMediumStyle];
         self.dateLabel.text = [formattedDate stringFromDate:self.task.date];
     }
+    
+    if (self.task.completion != editedTask.completion)
+        [self setStatusButtonColor];
     
     [self.navigationController popViewControllerAnimated:YES];
     
