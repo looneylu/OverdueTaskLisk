@@ -39,9 +39,6 @@
     [self alertUser];
 }
 
-
-
-
 #pragma mark - Lazy Instantiation
 
 - (NSMutableArray *) taskObjects
@@ -316,6 +313,7 @@
     {
         NSIndexPath *indexPath = sender;
 
+        // create a variable of the class and set its delegate property to self
         DetailTaskViewController *detailTaskVC = segue.destinationViewController;
         
         LRCTask *task = [self.taskObjects objectAtIndex:indexPath.row];
