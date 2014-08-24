@@ -91,6 +91,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		841B1ED919AA9DE9000387BE /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		84E0D852197FFBEC00A0D7AC = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +131,7 @@
 		84E0D864197FFBEC00A0D7AC /* OverdueTaskList */ = {
 			isa = PBXGroup;
 			children = (
+				841B1ED919AA9DE9000387BE /* iPad */,
 				84E0D870197FFBEC00A0D7AC /* Main.storyboard */,
 				84E0D873197FFBEC00A0D7AC /* LRCViewController.h */,
 				84E0D874197FFBEC00A0D7AC /* LRCViewController.m */,
@@ -412,7 +420,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OverdueTaskList/OverdueTaskList-Prefix.pch";
 				INFOPLIST_FILE = "OverdueTaskList/OverdueTaskList-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -425,7 +435,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OverdueTaskList/OverdueTaskList-Prefix.pch";
 				INFOPLIST_FILE = "OverdueTaskList/OverdueTaskList-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

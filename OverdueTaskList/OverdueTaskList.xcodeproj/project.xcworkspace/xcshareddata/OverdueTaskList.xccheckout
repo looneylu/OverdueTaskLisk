@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7DC575C8-B9D7-48AB-B714-FC0181C23984</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OverdueTaskList</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7C7CC0AB-B486-4FA9-B8AF-E2A253349BFA</key>
+		<string>https://github.com/looneylu/OverdueTaskLisk.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>OverdueTaskList/OverdueTaskList.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7C7CC0AB-B486-4FA9-B8AF-E2A253349BFA</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/looneylu/OverdueTaskLisk.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7C7CC0AB-B486-4FA9-B8AF-E2A253349BFA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7C7CC0AB-B486-4FA9-B8AF-E2A253349BFA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>OverdueTaskLisk</string>
+		</dict>
+	</array>
+</dict>
+</plist>
